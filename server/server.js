@@ -25,7 +25,7 @@ const loadUserData = async () => {
 // Call function to initialize userData
 loadUserData();
 
-// GET username endpoint
+// GET username endpoint to retrieve the username from the server and send it to the client
 app.get('/getUsername', (req, res) => {
   try {
     if (!userData || !userData.username) {
@@ -38,7 +38,7 @@ app.get('/getUsername', (req, res) => {
   }
 });
 
-// POST to save user data
+// POST saveUser endpoint to save user data created in the signup page by the user
 app.post('/saveUser', async (req, res) => {
   const { username, email, password } = req.body;
 
@@ -46,7 +46,7 @@ app.post('/saveUser', async (req, res) => {
     console.error('Missing user data');
     return res.status(400).send('Missing user data');
   }
-
+  // Update userData with the new user information
   userData = { username, email, password };
 
   try {
@@ -59,6 +59,7 @@ app.post('/saveUser', async (req, res) => {
   }
 });
 
+// Start the server and listen on the specified port
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });

@@ -1,4 +1,4 @@
-// Create the form
+// Create the form element
 const form = document.createElement('form');
 form.id = 'signupForm';
 
@@ -12,7 +12,7 @@ form.style.borderRadius = '5px';
 form.style.backgroundColor = '#fff';
 form.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
 
-// Create input fields and labels
+// Function to create input fields and labelslabels
 function createField(labelText, inputType, inputName, placeholderText) {
     const fieldWrapper = document.createElement('div');
     fieldWrapper.style.marginBottom = '15px';
@@ -43,11 +43,13 @@ function createField(labelText, inputType, inputName, placeholderText) {
     return input;
 }
 
+// Create input fields for username, email, password, and confirm password
 const usernameInput = createField('Username', 'text', 'username', 'Enter a username...');
 const emailInput = createField('Email address', 'email', 'email', 'Enter your email address...');
 const passwordInput = createField('Password', 'password', 'password', 'Enter your password...');
 const confirmPasswordInput = createField('Confirm Password', 'password', 'confirmPassword', 'Enter your password again...');
 
+// Create and style the submit button
 const button = document.createElement('button');
 button.type = 'submit';
 button.textContent = 'Sign up';
@@ -60,18 +62,23 @@ button.style.border = 'none';
 button.style.borderRadius = '5px';
 button.style.cursor = 'pointer';
 
+// Add hover effects to the submit button
 button.addEventListener('mouseover', () => {
     button.style.backgroundColor = '#218838';
 });
 
+// Append the submit button to the form
 button.addEventListener('mouseout', () => {
     button.style.backgroundColor = '#28a745';
 });
 
+// Append the submit button to the form
 form.appendChild(button);
+// Append the form to the app element
 const myApp = document.getElementById('app');
 myApp.appendChild(form);
 
+// Style the app element
 myApp.style.fontFamily = 'Arial, sans-serif';
 myApp.style.backgroundColor = '#f8f9fa';
 myApp.style.display = 'flex';
@@ -80,6 +87,7 @@ myApp.style.alignItems = 'center';
 myApp.style.minHeight = '100vh';
 myApp.style.margin = '0';
 
+// Add event listener to handle form submission
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const username = usernameInput.value;
@@ -87,6 +95,7 @@ form.addEventListener('submit', async (e) => {
     const password = passwordInput.value;
     const confirmPassword = confirmPasswordInput.value;
 
+    // Validate input fields
     if (username.length < 4 || username.length > 8) {
         alert('Username must be 4-8 characters long');
         return;
@@ -103,14 +112,15 @@ form.addEventListener('submit', async (e) => {
         alert('Passwords do not match');
         return;
     }
-
+    
     try {
+      // Send a POST request to save user data from the server
         const response = await axios.post('http://localhost:3000/saveUser', {
           username,
           email,
           password,
         });
-    
+        // Handle the response
         if (response.status === 200) {
           window.location.href = '/client/public/home.html';
         } else {
