@@ -47,5 +47,5 @@ myForm.addEventListener('submit', (e) => {
       alert('Name must be at least 2 characters long');
       return;
     }
-    window.location.href = '/public/signup.html';
+    window.location.href = '/client/public/signup.html';
   });

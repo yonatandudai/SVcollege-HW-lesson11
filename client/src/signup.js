@@ -112,7 +112,7 @@ form.addEventListener('submit', async (e) => {
         });
     
         if (response.status === 200) {
-          window.location.href = '/public/home.html';
+          window.location.href = '/client/public/home.html';
         } else {
           alert('Error: Could not save user details.');
         }
